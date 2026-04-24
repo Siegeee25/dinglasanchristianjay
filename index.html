@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christian Jay C. Dinglasan — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e45;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f7f3ec;
+    --cream-dark: #ede8df;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --white: #ffffff;
+    --accent: #2563a8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,27,42,0.96);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    padding: 6rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom right, transparent 49%, var(--cream) 50%);
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .hero-photo-wrap {
+    position: relative;
+  }
+
+  .hero-photo-frame {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .hero-photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(135deg, var(--gold), transparent 60%);
+    border-radius: 10px;
+    z-index: 0;
+  }
+
+  .hero-photo-frame img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 6px;
+  }
+
+  .hero-photo-accent {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 120px; height: 120px;
+    border: 2px solid rgba(201,168,76,0.3);
+    border-radius: 4px;
+    z-index: 0;
+  }
+
+  /* SECTIONS COMMON */
+  section { padding: 5rem 3rem; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--white);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .info-card {
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .info-card .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .info-card .value {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  /* SKILLS */
+  #skills {
+    background: var(--cream);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: 10px;
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+  }
+
+  .skill-icon {
+    width: 50px; height: 50px;
+    background: var(--navy);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.4rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .skill-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* CERTIFICATIONS */
+  #certifications {
+    background: var(--navy);
+  }
+
+  #certifications .section-title { color: var(--white); }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .cert-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .cert-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .cert-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .cert-icon {
+    width: 48px; height: 48px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .cert-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+  }
+
+  .cert-card .cert-org {
+    font-size: 0.82rem;
+    color: var(--gold);
+  }
+
+  .cert-date {
+    display: inline-block;
+    background: rgba(201,168,76,0.1);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.78rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    border: 1px solid rgba(201,168,76,0.15);
+    margin-bottom: 0.8rem;
+  }
+
+  .cert-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  .cert-img-wrap {
+    width: 100%;
+    margin: 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.25);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cert-img-wrap img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .cert-img-wrap:hover img { transform: scale(1.03); opacity: 0.85; }
+
+  .cert-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,27,42,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .cert-img-wrap:hover .cert-img-overlay { opacity: 1; }
+
+  .cert-img-overlay span {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.88);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .lightbox.active { display: flex; }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .lightbox-inner img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    display: block;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -14px; right: -14px;
+    width: 36px; height: 36px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .lightbox-caption {
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  /* EDUCATION */
+  #education {
+    background: var(--white);
+  }
+
+  .edu-card {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 2rem 2.5rem;
+    max-width: 700px;
+  }
+
+  .edu-card .school {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-card .course {
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+
+  .edu-card .detail {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2rem 3rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  footer span { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .hero { padding: 5rem 1.5rem 4rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-photo-frame img { height: 320px; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .info-cards { grid-template-columns: 1fr; }
+  }
+
+  .hero-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  a.hero-contact-item:hover {
+    color: var(--gold);
+  }
+
+  .hero-contact-item svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  a.hero-contact-item:hover svg {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">CJD</div>
+  <ul class="nav-links">
+    <li><a href="#home">Profile</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certificates</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">IT Professional &amp; Designer</div>
+      <h1>Christian Jay<br><span>C. Dinglasan</span></h1>
+      <p class="hero-subtitle">BSIT Student &nbsp;·&nbsp; UI/UX Designer &nbsp;·&nbsp; Web Developer</p>
+      <div class="hero-contact">
+        <a href="mailto:christianjaydinglasan@gmail.com" class="hero-contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          christianjaydinglasan@gmail.com
+        </a>
+        <span class="hero-contact-item hero-location">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Tagaytay City, Philippines
+        </span>
+      </div>
+      <p class="hero-desc">Passionate about crafting intuitive digital experiences through clean code and thoughtful design. Currently pursuing a Bachelor of Science in Information Technology at City College of Tagaytay.</p>
+      <a href="#about" class="hero-cta">View My Profile</a>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <img src="profileimage.jpg" alt="Christian Jay C. Dinglasan" onerror="this.style.background='#1a2e45';this.style.height='480px';this.alt='Photo not loaded';">
+      </div>
+      <div class="hero-photo-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a motivated and driven Information Technology student with a deep interest in both software development and visual design. I believe that great technology is not just functional — it should be beautiful and intuitive.</p>
+        <p>With hands-on knowledge in web technologies and a growing passion for UI/UX design, I aim to build digital solutions that make people's lives easier and more enjoyable.</p>
+        <p>I continue to sharpen my skills through webinars, self-study, and practical projects — always staying current with industry trends in networking, AI, and software development.</p>
+      </div>
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="label">Full Name</div>
+          <div class="value">Christian Jay C. Dinglasan</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Date of Birth</div>
+          <div class="value">December 25, 2003</div>
+        </div>
+        <div class="info-card">
+          <div class="label">School</div>
+          <div class="value">City College of Tagaytay</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Course</div>
+          <div class="value">BS Information Technology</div>
+        </div>
+        <div class="info-card" style="grid-column: span 2;">
+          <div class="label">Location</div>
+          <div class="value">Philippines</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">What I Know</p>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <h3>HTML</h3>
+        <p>Structure & semantic web markup</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <h3>CSS</h3>
+        <p>Styling, layouts & responsive design</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <h3>PHP</h3>
+        <p>Server-side scripting & backend logic</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h3>MySQL</h3>
+        <p>Database design & management</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">✏️</div>
+        <h3>UI/UX Design</h3>
+        <p>User-centered interface design</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <h3>Networking</h3>
+        <p>CCNA &amp; CompTIA Network concepts</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="Certificate">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <p class="section-label">Achievements</p>
+    <h2 class="section-title">Certificates of Participation</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-header">
+          <div class="cert-icon">🌐</div>
+          <div>
+            <h3>Introduction to Certifications in Networking — CCNA &amp; CompTIA Network+</h3>
+            <p class="cert-org">Ethel Programming Computer Programming Services</p>
+          </div>
+        </div>
+        <div class="cert-img-wrap" onclick="openLightbox('networkingcertificate.png', 'CCNA & CompTIA Network+ Certificate')">
+          <img src="networkingcertificate.png" alt="Networking Certificate" onerror="this.closest('.cert-img-wrap').style.display='none'">
+          <div class="cert-img-overlay"><span>View Certificate</span></div>
+        </div>
+        <div class="cert-date">February 16, 2026</div>
+        <p class="cert-desc">Successfully participated in a 1-hour webinar covering foundational concepts in networking certifications including CCNA and CompTIA Network+, organized via Google Meet. Speaker: Mr. Kevin Yu.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-header">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <h3>Role of Artificial Intelligence in Business Management</h3>
+            <p class="cert-org">Ethel Programming Computer Programming Services</p>
+          </div>
+        </div>
+        <div class="cert-img-wrap" onclick="openLightbox('aicertificate.png', 'AI in Business Management Certificate')">
+          <img src="aicertificate.png" alt="AI Certificate" onerror="this.closest('.cert-img-wrap').style.display='none'">
+          <div class="cert-img-overlay"><span>View Certificate</span></div>
+        </div>
+        <div class="cert-date">February 13, 2026</div>
+        <p class="cert-desc">Successfully participated in a 1-hour webinar exploring the role of AI in transforming business management practices and decision-making, organized via Google Meet. Speaker: Ms. Mikee Constantino, PhDBM cand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card">
+      <div class="school">City College of Tagaytay</div>
+      <div class="course">Bachelor of Science in Information Technology</div>
+      <p class="detail">Pursuing a degree with a focus on software development, web technologies, networking, and user interface design. Actively participating in webinars and professional development activities to complement academic learning.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 <span>Christian Jay C. Dinglasan</span> &nbsp;·&nbsp; BSIT Student &nbsp;·&nbsp; All Rights Reserved</p>
+</footer>
+
+<script>
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>
